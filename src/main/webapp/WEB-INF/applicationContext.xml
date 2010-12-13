@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>    
+
+  <!-- This is a way of avoiding hardwiring configurations down in a
+       file like this one.  Instead all the data can be kept in the
+       src/main/config/*.properties files.  In "project.xml" we
+       request that all such properties files be included in the
+       classpath. -->
+  <bean id="propertyconfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+      <list>
+        <value>classpath:jdbc.properties</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="dataSource" 
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName">
+      <value>${jdbc.driverClassName}</value>
+    </property>
+    <property name="url"><value>${jdbc.url}</value></property>
+    <property name="username"><value>${jdbc.username}</value></property>
+    <!-- Make sure <value> tags are on same line - if they're not, 
+         authentication will fail -->
+    <property name="password"><value>${jdbc.password}</value></property>
+  </bean>
+    
+  <!-- Hibernate SessionFactory for Open Mentor data storage -->
+  <bean id="sessionFactory" 
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <property name="dataSource"><ref local="dataSource"/></property>
+    <property name="mappingResources">
+      <list>
+        <value>uk/org/openmentor/model/Assignments.hbm.xml</value>
+      </list>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">
+          org.hibernate.dialect.MySQLDialect
+        </prop>
+        <!-- This affects whether the database is flushed on deployment -->
+        <!-- Use create to blank everything, update to persist -->
+        <prop key="hibernate.hbm2ddl.auto">update</prop>
+        <prop key="hibernate.show_sql">false</prop>
+      </props>
+    </property>
+  </bean>
+    
+  <bean id="extractor"
+        class="uk.org.openmentor.extractor.impl.ExtractStandard">
+  </bean>
+	
+  <bean id="evaluationScheme"
+        class="uk.org.openmentor.evaluator.impl.FileEvaluationScheme">
+    <property name="sourceFile">
+      <value>evaluators/default.xml</value>
+    </property>
+  </bean>
+    
+  <bean id="classifier"
+        class="uk.org.openmentor.classifier.impl.PatternClassifier">
+    <property name="sourceFile">
+      <value>rulesets/default.xml</value>
+    </property>
+  </bean>
+  
+  <bean id="evaluator"
+        class="uk.org.openmentor.evaluator.impl.StandardEvaluator">
+    <constructor-arg>
+      <ref bean="evaluationScheme"/>
+    </constructor-arg>
+  </bean>
+  
+  <bean id="descriptorFactory"
+        class = "uk.org.openmentor.businesslogic.DescriptorFactory">
+    <constructor-arg>
+      <ref bean="evaluationScheme"/>
+    </constructor-arg>
+  </bean>
+
+  <bean id="categorization"
+        class ="uk.org.openmentor.businesslogic.impl.CategorizationImpl">
+  </bean>
+
+<!-- The next bean comes in two flavours; only keep one of them
+     uncommented at a time. -->
+  <!-- Make sure <value> tags for the password are on same line - if
+       they're not, authentication will fail -->
+  <!--
+  <bean id="businessLogic"
+        class="uk.org.openmentor.businesslogic.impl.SQLBusinessLogic">
+    <property name="evaluationScheme">
+      <ref bean="evaluationScheme"/>
+    </property>
+    <property name="driverClassName">
+      <value>${jdbc.driverClassName}</value>
+    </property>
+    <property name="url"><value>${jdbc.url}</value></property>
+    <property name="username"><value>${jdbc.username}</value></property>
+    <property name="password"><value>${jdbc.password}</value></property>
+  </bean>
+  -->    
+  <bean id="businessLogic"
+        class="uk.org.openmentor.businesslogic.impl.HibernateBusinessLogic">
+    <property name="evaluationScheme">
+      <ref bean="evaluationScheme"/>
+    </property>
+    <property name="categorization">
+      <ref bean="categorization"/>
+    </property>
+    <property name="modelManager">
+      <ref bean="modelManager"/>
+    </property>
+  </bean>
+
+  <bean id="analyzer"
+        class="uk.org.openmentor.analyzer.impl.StandardAnalyzer">
+    <property name="classifier"><ref bean="classifier"/></property>
+    <property name="extractor"><ref bean="extractor"/></property>
+  </bean>
+
+  <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+  <bean id="transactionManager" 
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+  </bean>
+
+  <bean id="dataSourceforCourseInfo" 
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName">
+      <value>${jdbc.courseinfo.driverClassName}</value>
+    </property>
+    <property name="url"><value>${jdbc.courseinfo.url}</value></property>
+    <property name="username">
+      <value>${jdbc.courseinfo.username}</value>
+    </property>
+    <!-- Make sure <value> tags are on same line - if they're not, 
+         authentication will fail -->
+    <property name="password">
+      <value>${jdbc.courseinfo.password}</value>
+    </property>
+  </bean>
+
+  <!-- Hibernate SessionFactory for course information -->
+  <bean id="sessionFactoryForCourseInfo" 
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <property name="dataSource">
+      <ref local="dataSourceforCourseInfo"/>
+    </property>
+    <property name="mappingResources">
+      <list>
+        <value>uk/org/openmentor/model/CourseInfo.hbm.xml</value>
+      </list>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">
+          org.hibernate.dialect.MySQLDialect
+        </prop>
+        <prop key="hibernate.hbm2ddl.auto">update</prop>
+        <prop key="hibernate.show_sql">false</prop>
+      </props>
+    </property>
+  </bean>
+    
+  <!-- Open Mentor information management -->
+  <!-- No transaction management is defined (or needed) here as the course 
+       information will not be edited through the system -->
+  <bean id="assignmentDAO" 
+        class="uk.org.openmentor.dao.hibernate.AssignmentDAOHibernate">
+    <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+  </bean>
+    
+  <bean id="assignmentManagerTarget" 
+        class="uk.org.openmentor.service.impl.AssignmentManagerImpl">
+    <property name="assignmentDAO"><ref bean="assignmentDAO"/></property>
+  </bean>
+  
+  <bean id="assignmentManager" 
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+    <property name="transactionManager">
+      <ref bean="transactionManager"/>
+    </property>
+    <property name="target"><ref bean="assignmentManagerTarget"/></property>
+    <property name="transactionAttributes">
+      <props>
+        <prop key="save*">PROPAGATION_REQUIRED</prop>
+        <prop key="remove*">PROPAGATION_REQUIRED</prop>
+        <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+      </props>
+    </property>
+  </bean>
+  
+  <!-- Course information management -->
+  <!-- No transaction management is defined (or needed) here as the course 
+       information will not be edited through the system -->
+  <bean id="courseInfoDAO" 
+        class="uk.org.openmentor.dao.hibernate.CourseInfoDAOHibernate">
+    <property name="sessionFactory">
+      <ref bean="sessionFactoryForCourseInfo"/>
+    </property>
+  </bean>
+  
+  <bean id="courseInfoManager" 
+        class="uk.org.openmentor.service.impl.CourseInfoManagerImpl">
+    <property name="courseInfoDAO"><ref bean="courseInfoDAO"/></property>
+  </bean>
+
+  <bean id="modelManager" 
+        class="uk.org.openmentor.service.impl.ModelManagerImpl">
+    <property name="courseInfoManager">
+      <ref bean="courseInfoManager"/>
+    </property>
+    <property name="assignmentManager">
+      <ref bean="assignmentManager"/>
+    </property>
+  </bean>
+
+</beans>

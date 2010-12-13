@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="uk.org.openmentor.model">
+  <class name="Course" table="tbl_course">
+    <id name="id" column="id" type="string" length="16">
+      <generator class="assigned"/>
+    </id>
+    <property name="courseTitle" column="course_title" 
+              type="string" length="255"/>
+    <set name="students" table="tbl_course_students" lazy="false">
+      <key column="course_id"/>
+      <many-to-many class="Student" column="student_id"/>
+    </set>
+    <set name="tutors" table="tbl_course_tutors" lazy="false">
+      <key column="course_id"/>
+      <many-to-many class="Tutor" column="tutor_id"/>
+    </set>
+  </class>
+  
+  <class name="Student" table="tbl_student">
+    <id name="orgId" column="org_id" type="string" length="16">
+      <generator class="assigned"/>
+    </id>
+    <property name="firstName" column="first_name"
+              type="string" not-null="true"/>
+    <property name="lastName" column="last_name"
+              type="string" not-null="true"/>
+  </class>
+  
+  <class name="Tutor" table="tbl_tutor">
+    <id name="orgId" column="org_id" type="string">
+      <generator class="assigned"/>
+    </id>
+    <property name="firstName" column="first_name"
+              type="string" not-null="true"/>
+    <property name="lastName" column="last_name"
+              type="string" not-null="true"/>
+  </class>
+</hibernate-mapping>

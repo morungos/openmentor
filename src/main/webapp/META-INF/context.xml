@@ -1,0 +1,7 @@
+<Context reloadable="true" 
+         crossContext="false"
+         path="/development"
+         antiJARLocking="true" 
+         antiResourceLocking="true"
+         docBase="H:/Construction/OpenMentor/OpenMentor/target/openmentor/">
+</Context>

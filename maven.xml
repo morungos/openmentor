@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="help" >
+  <goal
+   name="help"
+   description="Suggests useful targets.">
+    <echo>
+
+      Useful targets include:
+
+      maven db:init         : drops the database and starts from a known state
+      maven tomcat:deploy   : creates the webapp and installs it in tomcat
+      maven tomcat:redeploy : creates the webapp and re-installs it in tomcat
+      maven site:generate   : documentation --- see target/docs/index.html
+
+      maven db:lock         : grabs current data for reloading by db.init
+      maven db:getschema    : run after schema change to gather the new schema
+
+      maven clean           : removes (almost) all build artifacts
+
+    </echo>
+  </goal>
+
+  <goal name="db:lock" 
+        description="Saves the data in the current database for 
+        future re-initialisation."
+        prereqs="torque:datadtd, torque:datadump">
+    <copy file="${torque.output.dir}/${torque.project}-data.dtd"
+          todir="${torque.schema.dir}"/> 
+    <copy 
+     file="${torque.output.dir}/${torque.project}-${torque.project}-all-data.xml"
+     tofile="${torque.schema.dir}/${torque.project}-data.xml"/>
+    <echo>
+      
+      Two new data files have been written to ${torque.schema.dir}.
+      Either remove them and do "svn update", or else commit them to
+      make current data the default initialisation data.
+      
+    </echo>
+  </goal>
+
+  <goal name="warn:schemaChange">
+    <echo>
+
+      This target may fail if the database schema has been changed.
+      In that case, either run the db:new target, or edit
+      torque_openmentor-data.dtd and torque_openmentor-data.xml in the
+      src/schema directory to suit the new schema, and so retain
+      existing initialisation data.
+
+    </echo>
+  </goal>
+
+  <goal name="clean-sql"
+        description="removes any sql left from previous generations.">
+    <delete dir="${torque.sql.dir}"/>
+  </goal>
+
+
+  <goal name="db:init" 
+        description="Creates and populates the main openmentor database using data from src/etc/schema."
+        prereqs="clean-sql, warn:schemaChange, torque:sql-generate,
+        torque:create-db, torque:datasql, torque:insert-sql">
+  </goal>
+
+  <goal name="db:getschema" 
+        description="Gathers an appropriate schema from the existing database."
+        prereqs="torque:jdbc">
+    <replace file="${torque.schema.dir}/schema.xml" 
+             token="&quot;torque&quot;" 
+             value="&quot;hibernate_openmentor&quot;"/>
+    <move file="${torque.schema.dir}/schema.xml"
+          tofile="${torque.schema.dir}/${torque.project}-schema.xml"/>
+    <echo>
+      
+      A new schema file has been written to ${torque.schema.dir}.
+      Either remove it and do "svn update", or else commit it to make
+      the current schema the default initialisation schema.
+      
+    </echo>
+  </goal>
+
+  <goal name="db:new" 
+        description="Completely exercises the system, assuming existing stored data fits the current database."
+        prereqs="db:getschema, db:init, db:lock">
+  </goal>
+
+</project>

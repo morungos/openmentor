@@ -1,0 +1,189 @@
+body { font-family: "Trebuchet MS", Verdana, Arial, sans-serif }
+/* Use the next *just* for breadcrumbs --- ie the trail left getting
+to the current page.   And note that the bottom border sets the space
+above the heading, previously done with <br/><br/> */
+.breadcrumbs { 
+        font-size: 1.5ex; 
+        text-decoration: none; 	
+        border-top: 1px solid #fff;
+	background-color: #ccc;
+	padding: 2px 8px;
+        border-bottom: 4ex solid #fff;
+}
+/* The next has been used for other purposes */
+.breadc { font-size: 1.5ex }
+#logininfo {
+           font-size: 1.5ex;
+           border-top: 50px solid #fff; 
+           background-color: #ccc;
+           padding: 2px 8px;    
+}          
+hr { height: 0px }
+
+em { font-weight: bold; font-style: normal }
+
+tr.WhiteBG {background-color: #FFFFFF}
+tr.OffWhiteBG {background-color: #FFFFCC}
+tr.BlueBG {background-color: #004080}
+tr.LightGrayBG {background-color: #EEEEEE}
+tr.NeatBG {background-color: #CCCCCC}
+
+.smallText { font-size: 1.3ex }
+td.footer { font-size:1.2ex }
+
+div.menuhead { font-weight: bold; font-size: 1.5ex; line-height: 200% }
+tr.boxhead { 
+  font-weight: bold; 
+  font-size: 1.7ex; 
+  line-height: 120%; 
+  text-align: center;
+  background-color: #004080;
+  color: white }
+tr.boxbody { 
+  line-height: 130%; 
+  background-color: #DCDCDC }
+  
+.tableHeadingWhite{ color:white; font-width: bold; font-size: 80% }
+
+table.commentTable { font-size: 80% }
+td.number { text-align: center }
+
+a.menulinks { font-size: 1.5ex }
+span.active { font-weight: bold }
+
+.spacer { line-height: 100px; white-space: pre }
+select.lists { font-family: Courier New, monospace; font-size: medium }
+option.opts { }
+div.para { font-size: 100% }
+div.textheading { font-size: 150%; font-weight:bold }
+span.filename { font-family: Courier New, monospace; line-height: 150%; font-weight: bold }
+h2.texthead { font-size: medium }
+h2.sitehead { 
+            font-size: x-large; 
+            color:#004080; 
+            font-weight:bold
+}
+.emphasised { font-weight: bold }
+
+/* Form style settings */
+input.inputlabel { font-size: small }
+span.formtitle { font-weight: bold }
+caption.tablecap { font-weight: bold }
+input.forminp { font-family: "Trebuchet MS", Verdana, Arial, sans-serif }
+/* To ensure pick lists have the same sized blank fields */
+.fixedinputsize { width: 180px }
+
+ul.list { page-break-before: auto; page-break-after: auto }
+.BoxList {
+	margin-left: 15px;
+	list-style: disc;
+    list-style-image:url(img/arrow.gif);
+}
+
+/* These next three are from raiblaes equinox demo.  This is the style
+for the informational messages presented to the user */
+
+div.error, div.message {
+    background: #ffc;
+    border: 1px solid green;
+    color: black;
+    font-weight: normal;
+    margin: 10px auto;
+    padding: 2px;
+    padding-left: 4px;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+/* use a different color for the errors */
+div.error {
+    border: 2px solid red;
+}
+
+span.fieldError, span.errorMessage {
+    color: maroon !important;
+}
+
+
+#navigation {
+	width: 150px;
+	float: left;
+	margin-left: -1px;
+    margin-right: 0px
+	}
+	
+	
+#content {
+	margin-left: 170px;
+	}
+
+#footer {
+	clear: both;
+	}
+
+tr.topHeader {background-color: #004080}
+tr.topHeader { background-color: #004080 }
+tr.topHeader th { color:white }
+td.logos { font-weight: bold }
+
+#logoAtLeft {
+	position: absolute;
+	left:10px;
+	top:20px;
+	width:110px;
+	background:#fff;
+	border:1px solid #FFF;
+	}
+
+#centerHeader { 
+        background:#fff;
+        padding-top: 3px;
+        margin-left: 119px;
+        margin-right:199px; 
+        border:1px solid #fff; 
+        /* IE5x PC mis-implements the box model. Because of that we
+        sometimes have to perform a little CSS trickery to get
+        pixel-perfect display across browsers.  The following bit of
+        code was proposed by Tantek Celik, and it preys upon a CSS
+        parsing bug in IE5x PC that will prematurly close a style rule
+        when it runs into the string "\"}\"". After that string
+        appears in a rule, then, we can override previously set
+        attribute values and only browsers without the parse bug will
+        recognize the new values. So any of the name-value pairs above
+        this comment that we need to override for browsers with
+        correct box-model implementations will be listed below.
+	
+	We use the voice-family property because it is likely to be
+	used very infrequently, and where it is used it will be set on
+	the body tag. So the second voice-family value of "inherit"
+	will override our bogus "\"}\"" value and allow the proper
+	value to cascade down from the body tag.  The style rule
+	immediately following this rule offers another chance for CSS2
+	aware browsers to pick up the values meant for correct
+	box-model implementations.  It uses a CSS2 selector that will
+	be ignored by IE5x PC.
+	
+	Read more at http://www.glish.com/css/hacks.asp
+	*/
+	
+	voice-family: "\"}\"";
+	voice-family: inherit;
+  	margin-left: 121px;
+  	margin-right:201px;
+	}
+html>body #centerHeader {
+        margin-left: 121px;
+   	margin-right:201px;
+        padding-top: 3px;
+	}
+#rightHeader {
+	position: absolute;
+	right:10px;
+	top:40px;
+	width:200px;
+	background:#fff;
+	border:1px solid #fff;
+        font-size: 1.5ex;
+        background-color: #ccc;
+	}
+

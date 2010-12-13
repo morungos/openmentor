@@ -1,0 +1,710 @@
+<?xml version="1.0"?>
+<ruleset id="1" type="regex" name="Standard rules">
+ <version><major>1</major><minor>0</minor><sub>0</sub></version>
+ <revised>21st January 2005</revised>
+ <description>Initial e-Mentor ruleset</description>
+ <categories>
+   <category name="A1">Shows tension release</category>
+   <category name="A2">Shows solidarity</category>
+   <category name="A3">Shows agreement</category>
+   <category name="B1">Gives suggestion</category>
+   <category name="B2">Gives opinion</category>
+   <category name="B3">Gives information</category>
+   <category name="C1">Asks for information</category>
+   <category name="C2">Asks for opinion</category>
+   <category name="C3">Asks for suggestion</category>
+   <category name="D1">Shows disagreement</category>
+   <category name="D2">Shows tension</category>
+   <category name="D3">Shows antagonism</category>
+ </categories>
+ <rules>
+   <rule id="1">
+    <match>Q\d+</match>
+    <categories include="B3"/>
+   </rule>
+   <rule id="3">
+    <match>excellent</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="4">
+    <match>(good|comprehensive)</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="5">
+    <match>well\s+(done|concluded)</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="6">
+    <match>\*tick\*</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="7">
+    <match>(discuss|explain)\s+further</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="8">
+    <match>notice\s+that</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="9">
+    <match>(would|might|could)\s+expand</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="10">
+    <match>enlarge\s+upon</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="17">
+    <match>\?</match>
+    <categories include="C1"/>
+   </rule>
+   <rule id="18">
+    <match>\bno\b</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="21">
+    <match>not\s+sure</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="22">
+    <match>better\s+job</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="23">
+    <match>try\s+to</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="24">
+    <match>\A\s*if</match>
+    <categories include="C2"/>
+   </rule>
+   <rule id="25">
+    <match>nicely</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="27">
+    <match>very\s+nice</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="28">
+    <match>remember</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="29">
+    <match>you\s+could</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="30">
+    <match>shows\s+an\s+understanding</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="32">
+    <match>i\s+would</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="33">
+    <match>but</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="34">
+    <match>(would|might|could)\s+be\s+(helpful|useful)</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="35">
+    <match>important\s+to</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="36">
+    <match>\A\s*Your</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="37">
+    <match>\A\s*Of\s+course</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="38">
+    <match>concise</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="39">
+    <match>(probably|possibly)\s+better\s+to</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="40">
+    <match>consider</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="41">
+    <match>need\s+to</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="42">
+    <match>careful</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="43">
+    <match>\A\s*Why</match>
+    <categories include="C1"/>
+   </rule>
+   <rule id="44">
+    <match>(some|more)\s+comments</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="45">
+    <match>you\s+should</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="47">
+    <match>not\s+the\s+(point|question)</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="48">
+    <match>I\s+recommend</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="49">
+    <match>\A\s*Before\s+you</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="51">
+    <match>no\s+need\s+to</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="53">
+    <match>\A\s*what\s+conclusions</match>
+    <categories include="C2"/>
+   </rule>
+   <rule id="54">
+    <match>\A\s*I\s+would\s+have</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="55">
+    <match>means\s+here</match>
+    <categories include="B3"/>
+   </rule>
+   <rule id="56">
+    <match>\A\s*I\s+(am|think)</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="58">
+    <match>better\s+to</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="59">
+    <match>\A\s*Please\s+(see|refer\s+to|look\s+at)</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="65">
+    <match>well\s+(structured|stated)</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="69">
+    <match>useful\s+not\s+to</match>
+    <categories include="B1" exclude="A1"/>
+   </rule>
+   <rule id="70">
+    <match>well\s+presented</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="72">
+    <match>effective\s+use</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="73">
+    <match>a\s+helpful</match>
+    <categories include="A2"/>
+   </rule>
+   <rule id="74">
+    <match>(thanks|thank\s+you)</match>
+    <categories include="A2"/>
+   </rule>
+   <rule id="79">
+    <match>take\s+care</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="80">
+    <match>also</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="82">
+    <match>best\s+to</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="83">
+    <match>note\s+that </match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="84">
+    <match>however</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="86">
+    <match>be\s+sure\s+to</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="87">
+    <match>think\s+about</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="89">
+    <match>needs\s+(to\s+be|some)</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="90">
+    <match>you\s+(have\s+to|must)</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="91">
+    <match>useful\s+to</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="92">
+    <match>requires</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="93">
+    <match>compare</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="94">
+    <match>perhaps</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="95">
+    <match>\A\s*Use</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="96">
+    <match>\A\s*Do\s+a</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="100">
+    <match>might\s+think\s+of</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="103">
+    <match>check</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="104">
+    <match>you\s+(might|ought)</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="106">
+    <match>\A\s*I\s+(thought|agree|suggest)</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="107">
+    <match>(analysis|analyse|assessment|evaluation)</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="108">
+    <match>\A\s*I\s+(do|don't) think</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="109">
+    <match>appears\s+to</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="110">
+    <match>inconsistent\s+with</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="111">
+    <match>(demonstrates|shows)\s+this</match>
+    <categories include="B3"/>
+   </rule>
+   <rule id="112">
+    <match>\A\s*And</match>
+    <categories include="B3"/>
+   </rule>
+   <rule id="113">
+    <match>\A\s*Also</match>
+    <categories include="B3"/>
+   </rule>
+   <rule id="114">
+    <match>\A\s*(What|where|how|can)</match>
+    <categories include="C1"/>
+   </rule>
+   <rule id="115">
+    <match>\A\s*In\s+what</match>
+    <categories include="C1"/>
+   </rule>
+   <rule id="116">
+    <match>\A\s*And\s+where</match>
+    <categories include="C1"/>
+   </rule>
+   <rule id="117">
+    <match>this\s+(should|does)\s+not</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="118">
+    <match>says\s+nothing</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="119">
+    <match>not\s+clear</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="120">
+    <match>missed\s+the\s+point</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="121">
+    <match>you\s+(do|must)\s+not</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="123">
+    <match>very\s+shallow</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="124">
+    <match>\A\s*I\s+disagree</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="126">
+    <match>disappointed</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="128">
+    <match>\A\s*It\s+is\s+not</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="129">
+    <match>(well|clear)(ly)?\s+(structured|structure|summary|summarised|presented|presentation)</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="131">
+    <match>sounds.*?like</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="132">
+    <match>lacks.*?structure</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="134">
+    <match>(this|that)\s+is better</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="135">
+    <match>\A\s*no</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="136">
+    <match>ok</match>
+    <categories include="A3"/>
+   </rule>
+   <rule id="137">
+    <match>yes</match>
+    <categories include="A3"/>
+   </rule>
+   <rule id="138">
+    <match>fine</match>
+    <categories include="A3"/>
+   </rule>
+   <rule id="139">
+    <match>agreed</match>
+    <categories include="A3"/>
+   </rule>
+   <rule id="140">
+    <match>indeed</match>
+    <categories include="A3"/>
+   </rule>
+   <rule id="141">
+    <match>needs\s+further</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="142">
+    <match>\A\s*This\s+is</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="143">
+    <match>explain\s+more</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="144">
+    <match>as\s+well\s+as</match>
+    <categories include="B3"/>
+   </rule>
+   <rule id="145">
+    <match>order</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="146">
+    <match>reasonable</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="147">
+    <match>if\s+you</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="148">
+    <match>useful\s+points?</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="149">
+    <match>yes.*?but</match>
+    <categories include="B1" exclude="A3"/>
+   </rule>
+   <rule id="150">
+    <match>explain</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="151">
+    <match>make\s+sure\s+to</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="152">
+    <match>link\s+to</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="153">
+    <match>\A\s*Not</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="154">
+    <match>(could|would|might)\s+also</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="156">
+    <match>\A\s*(Don't|Dont|Do\s+not)</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="157">
+    <match>(evidence|reference)</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="158">
+    <match>seems\s+valid</match>
+    <categories include="A3"/>
+   </rule>
+   <rule id="159">
+    <match>fair\s+comment</match>
+    <categories include="A3"/>
+   </rule>
+   <rule id="160">
+    <match>correction</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="162">
+    <match>interesting</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="163">
+    <match>give.*?examples</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="164">
+    <match>(was|is)\s+needed</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="165">
+    <match>same as.*?before</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="166">
+    <match>please</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="167">
+    <match>word\s+count</match>
+    <categories include="B3"/>
+   </rule>
+   <rule id="168">
+    <match>\A\s*Part\s+[A-Z1-9]</match>
+    <categories include="B3"/>
+   </rule>
+   <rule id="169">
+    <match>\A\s*Question\s+\d+</match>
+    <categories include="B3"/>
+   </rule>
+   <rule id="170">
+    <match>\A\s*Page:?\s+\d+</match>
+    <categories include="B3"/>
+   </rule>
+   <rule id="171">
+    <match>clear\s+intro</match>
+    <categories include="A1"/>
+   </rule>
+   <rule id="172">
+    <match>\d+\s+words</match>
+    <categories include="B3"/>
+   </rule>
+   <rule id="173">
+    <match>\A\s*Overall</match>
+    <categories include="B3"/>
+   </rule>
+   <rule id="174">
+    <match>ref</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="175">
+    <match>(might|could|would|may|should)\s+have\s+been</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="176">
+    <match>\A\s*Don't|never</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="177">
+    <match>could\s+be\s+viewed\s+as</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="178">
+    <match>could\s+probably\s+have</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="179">
+    <match>not\s+enough</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="180">
+    <match>wondering</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="181">
+    <match>reaction\s+is</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="182">
+    <match>i\s+think</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="183">
+    <match>i\s+assume\s+that</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="184">
+    <match>in\s+my\s+opinion</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="185">
+    <match>would.*?good</match>
+    <categories include="B5" exclude="A1"/>
+   </rule>
+   <rule id="186">
+    <match>would\s+be</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="187">
+    <match>good.*?but</match>
+    <categories include="B1" exclude="A1"/>
+   </rule>
+   <rule id="188">
+    <match>good\s+example.*?(but|better\s+to)</match>
+    <categories include="B1" exclude="A1"/>
+   </rule>
+   <rule id="189">
+    <match>well\s+observed\s+except</match>
+    <categories include="B1" exclude="A1"/>
+   </rule>
+   <rule id="190">
+    <match>it\s+is\s+a\s+good\s+idea\s+to</match>
+    <categories include="B1" exclude="A1"/>
+   </rule>
+   <rule id="191">
+    <match>excellent\s+analysis</match>
+    <categories include="A1" exclude="B5"/>
+   </rule>
+   <rule id="192">
+    <match>ok.*?but</match>
+    <categories include="B1" exclude="A3"/>
+   </rule>
+   <rule id="193">
+    <match>\A\s*i\s+(don't|do\s+not)\s+understand</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="194">
+    <match>I\s+have\s+to</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="195">
+    <match>bear(ing)?\s+in\s+mind</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="196">
+    <match>you\s+seem\s+to\s+be</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="197">
+    <match>(I'm|I\s+am)\s+not</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="198">
+    <match>you\s+needed\s+to</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="199">
+    <match>could\s+be</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="200">
+    <match>make\s+it.*?clear</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="201">
+    <match>\A\s*(I'm|I\s+am)\s+not</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="202">
+    <match>\A\s*(So|therefore)</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="203">
+    <match>very\s+brief</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="204">
+    <match>this.*?is.*?better</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="205">
+    <match>you\s+can\s+use</match>
+    <categories include="B5"/>
+   </rule>
+   <rule id="206">
+    <match>this.*?does\s+not</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="207">
+    <match>what\s+are</match>
+    <categories include="C1"/>
+   </rule>
+   <rule id="208">
+    <match>worth\s+(mentioning|commenting)</match>
+    <categories include="B1"/>
+   </rule>
+   <rule id="209">
+    <match>what\s+does</match>
+    <categories include="C1"/>
+   </rule>
+   <rule id="210">
+    <match>don't\s+understand</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="211">
+    <match>not\s+necessarily</match>
+    <categories include="D1"/>
+   </rule>
+   <rule id="212">
+    <match>too\s+many</match>
+    <categories include="B2"/>
+   </rule>
+   <rule id="213">
+    <match>already\s+said</match>
+    <categories include="B2"/>
+   </rule>
+   <rule id="214">
+    <match>losing.*?focus</match>
+    <categories include="B2"/>
+   </rule>
+   <rule id="215">
+    <match>i.*?like</match>
+    <categories include="B2"/>
+   </rule>
+   <rule id="216">
+    <match>too\s+descriptive</match>
+    <categories include="B2"/>
+   </rule>
+  </rules>
+</ruleset>

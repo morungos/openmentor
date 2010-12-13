@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<document>
+  
+  <properties>
+    <author email="Ian.Craw@openability.co.uk">Ian Craw</author>
+    <title>
+      Outstanding Tasks
+    </title>
+  </properties>
+  
+  <meta name="keyword" content="CAA, java"/>
+  <body>
+    <section name="Issues">
+      <p>
+        Ideally this section should be transitory, and will soon be
+        replaced by more robust issue tracking.  I don't think we need
+        <a href="http://scarab.tigris.org/"> Scarab</a> or anything of
+        that complexity, but in the meantime it is sensible to write
+        down somewhere problems that appear.
+      </p>
+      <subsection name="Issues with the Existing System">
+        <p>
+          The first issue I note concerns testing.  Not the complete
+          lack of unit test for what is arguably the hard bit of the
+          code, including the database access and parsing, but the
+          fact that a couple of the tests in the reporting test suite
+          had to be disabled.  One of them, "TestChart.java" was
+          essentially empty so was dumped; it can easily be recreated
+          or retrieves if necessary.  The other,
+          "TestReportRequestParser.java", contained three junit
+          assertions, two of which were failed; these were commented
+          out to allow the test to complete, but it worries me to
+          switch off the alarm when it sounds!
+        </p>
+        <p>
+          I also noted some problems when converting to <a
+          href="http://www.opensymphony.com/sitemesh">sitemesh</a>.
+          There is some anomalous naming in that "editassigment.jsp"
+          was unlike the other "edit" pages, as cane be seen from the
+          "decorators/xml" file in the WEB-INF directory.  More
+          importantly it seemed confused, since it implemented "Step
+          1" of a procedure, but I could find no way of getting from
+          it to "step 2"
+        </p>
+        <p>
+          A further anomaly is with four "report_*.jsp" files.  There
+          is a "report_teachers.jsp" file even though the word
+          "teacher" isn't used elsewhere.  It is even clearer that
+          there is a problem, when the last of the links in
+          "viewreports.jsp is to a non-existent "report_students.jsp".
+        </p>
+        <p>
+          With the database in its initial form, the only one of these
+          report files which has content is "report_assignments.jsp.
+          Unfortunately this has links to three charts, but e.g.
+          "viewevidence_31_bar.jsp" id missing.  I guess this bit
+          needs more checking by someone who knows what is supposed to
+          happen.
+        </p>
+        <p>
+          The version of jCharts needed to make the system work is 
+          <b>not</b> the same as the standard distribution. Several
+          private methods have been modified to be publicly visible.
+          As it standards, OpenMentor depends on this revised version
+          of jCharts, which has been placed on the Subversion repository
+          for now. A better solution would be to explore rewriting the
+          code to work with the original, despite its limitations. There
+          are about five or six compilation errors when using the 
+          original. 
+        </p>
+      </subsection>
+
+      <subsection name="Maven Issues">
+        <p>
+          The focus of the first change in the second stage of the
+          development of OpenMentor has been to convert the code to <a
+          href="http://maven.apache.org/">maven</a>.  Maven delivers
+          significant benefit in terms both of avoiding routine build
+          files; <pre>    maven tomcat:redeploy</pre> does a complete
+          build, test and install from very little configuration; and
+          in terms of report generation where 
+          <pre>    site:generate</pre> produces much detail: nevertheless there
+          are the usual open source problems of documentation.
+          </p>
+          <p>
+            I note below those with which I am still having difficulty.
+          </p>
+        <ul>
+          <li> It is hard to get started!  Maven won't do anything
+          useful until its dependencies are satisfied.  So it has to
+          be able to download (a large number of) jars from the web.
+          The key here is to have something like
+          <source>
+            maven.proxy.host = 10.32.1.10
+            maven.proxy.port = 3128
+          </source>
+          in your "home" directory.
+          </li>
+          <li> Access to the svn server should happen automatically to
+          generate the Change log, file activity and developer
+          activity.  This worked for me outside Smartweb, but not
+          inside it, so there may be a proxying problem which needs to
+          be understood.  And I note I had to give my userid on the
+          svn server (ian) in order for this to work at all.  So it is
+          almost certainly using my cached password as well; this is
+          clearly not portable.  While it is possible to add a
+          password property to "project.properties" this is obviously
+          discouraged by the corresponding plugin, which suggest other
+          security routes.  I guess this need exploring.
+		  </li>
+          <li> The <tt> javadoc</tt> task takes the package name
+          from the pom.  If the <tt>openmentor</tt> package were
+          renamed as <tt>uk.ac.open.iet.openmentor</tt>, then
+          declaring the package as <tt>uk.ac</tt> would ensure that
+          all the javadocs are produced.  As it stands the package has
+          to be declared as the rather uninformative <tt>*</tt> to
+          do this.
+          </li>
+        </ul>
+      </subsection>
+    </section>
+  </body>
+</document>
+

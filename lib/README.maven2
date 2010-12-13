@@ -1,0 +1,24 @@
+It looks as though only the two jCharts files and jta-1.0.1B.jar are
+now needed, since everything else required will come from ibiblio.
+The remainder of the jars here can be dumped as soon as we have moved
+to maven2.
+
+These three files should be copied to the maven2 repository: on my
+UNIX machine, the paths are:-
+
+/home/igc/.m2/repository/jCharts/jCharts/0.7.5/jCharts-0.7.5.jar
+/home/igc/.m2/repository/jCharts/jCharts/0.7.5/jCharts-0.7.5.pom
+/home/igc/.m2/repository/javax/transaction/jta/1.0.1B/jta-1.0.1B.jar
+
+To avoid knowing the local repository location, files can be
+installed directly in the repository with a command like:-
+
+galois% mvn install:install-file -DgroupId=javax.transaction \
+        -DartifactId=jta -Dversion=1.0.1B \
+        -Dpackaging=jar -Dfile=/path/to/file
+[and I note that a simple copy requires a 7k + 93b download!]
+
+A useful reference is
+http://maven.apache.org/guides/mini/guide-coping-with-sun-jars.html
+and the link at the end of that file to 
+http://maven.apache.org/guides/mini/guide-installing-3rd-party-jars.html

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <!-- ======================== FILTER CHAIN ======================= -->
+  <bean id="filterChainProxy"
+      class="net.sf.acegisecurity.util.FilterChainProxy">
+    <property name="filterInvocationDefinitionSource">
+      <value>
+        CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
+        PATTERN_TYPE_APACHE_ANT
+        /**=httpSessionContextIntegrationFilter,anonymousProcessingFilter,authenticationProcessingFilter,requestMethodsFilter,securityEnforcementFilter 
+      </value>
+    </property>
+  </bean>
+  
+  <!-- ======================== AUTHENTICATION ======================= -->
+  <bean id="authenticationManager"
+        class="net.sf.acegisecurity.providers.ProviderManager">
+    <property name="providers">
+      <list>
+        <ref local="daoAuthenticationProvider"/>
+        <ref local="anonymousAuthenticationProvider"/>
+      </list>
+    </property>
+  </bean>
+
+  <!-- the OMUser password is "openmentor"; convert eg at http://serversniff.net/hash.php -->
+  <!-- Admin has password "WattL0ck" (capital L, zero, c, k)  -->
+  <bean id="inMemoryDaoImpl"
+       class="net.sf.acegisecurity.providers.dao.memory.InMemoryDaoImpl">
+    <property name="userMap">
+      <value>
+        OMUser=65fdb0149396dfeb120c2329ba2571a853367c21,ROLE_USER
+        admin=7b50715c7f642fc0f5a2780d236377548afdc801,ROLE_ADMIN
+      </value>
+    </property>
+  </bean>
+  
+  <bean id="passwordEncoder"
+        class="net.sf.acegisecurity.providers.encoding.ShaPasswordEncoder"/>
+
+   <!-- Automatically receives AuthenticationEvent messages from
+        DaoAuthentication Provider -->
+    <bean id="loggerListener" 
+          class="net.sf.acegisecurity.event.authentication.LoggerListener"/>
+
+  <bean id="daoAuthenticationProvider"
+        class="net.sf.acegisecurity.providers.dao.DaoAuthenticationProvider">
+    <property name="authenticationDao">
+      <ref local="inMemoryDaoImpl"/>
+    </property>
+    <property name="passwordEncoder">
+      <ref local="passwordEncoder"/>
+    </property>
+  </bean>
+
+  <bean id="anonymousProcessingFilter" 
+        class="net.sf.acegisecurity.providers.anonymous.AnonymousProcessingFilter">
+    <property name="key"><value>foobar</value></property>
+    <property name="userAttribute"><value>visitor,ROLE_ANONYMOUS</value></property>
+  </bean>
+
+  <bean id="anonymousAuthenticationProvider" 
+        class="net.sf.acegisecurity.providers.anonymous.AnonymousAuthenticationProvider">
+    <property name="key"><value>foobar</value></property>
+  </bean>  
+
+  <!-- Form-based Authentication -->
+  <bean id="authenticationProcessingFilter"
+        class="net.sf.acegisecurity.ui.webapp.AuthenticationProcessingFilter">
+    <property name="authenticationManager">
+      <ref local="authenticationManager"/>
+    </property>
+    <property name="authenticationFailureUrl">
+      <value>/loginError.htm</value>
+    </property>
+    <property name="defaultTargetUrl"><value>/</value></property>
+    <property name="filterProcessesUrl">
+      <value>/j_security_check</value>
+    </property>
+  </bean>
+  
+  <bean id="authenticationProcessingFilterEntryPoint"
+        class="net.sf.acegisecurity.ui.webapp.AuthenticationProcessingFilterEntryPoint">
+    <property name="loginFormUrl"><value>/signin.jsp</value></property>
+    <property name="forceHttps"><value>false</value></property>
+  </bean>
+  
+  <!-- ===================== HTTP REQUEST SECURITY ==================== -->
+  <bean id="httpSessionContextIntegrationFilter"
+        class="net.sf.acegisecurity.context.HttpSessionContextIntegrationFilter">
+    <property name="context">
+      <value>net.sf.acegisecurity.context.SecurityContextImpl</value>
+    </property>
+  </bean>
+  
+  <bean id="securityEnforcementFilter"
+        class="net.sf.acegisecurity.intercept.web.SecurityEnforcementFilter">
+    <property name="filterSecurityInterceptor">
+      <ref local="filterInvocationInterceptor"/>
+    </property>
+    <property name="authenticationEntryPoint">
+      <ref local="authenticationProcessingFilterEntryPoint"/>
+    </property>
+  </bean>
+  
+  <bean id="httpRequestAccessDecisionManager"
+        class="net.sf.acegisecurity.vote.AffirmativeBased">
+    <property name="allowIfAllAbstainDecisions">
+      <value>false</value>
+    </property>
+    <property name="decisionVoters">
+      <list>
+        <ref bean="roleVoter"/>
+      </list>
+    </property>
+  </bean>
+  
+  <bean id="roleVoter"
+        class="net.sf.acegisecurity.vote.RoleVoter"/>
+
+  <bean id="requestMethodsFilter"
+        class="net.sf.acegisecurity.wrapper.SecurityContextHolderAwareRequestFilter"/>
+
+  <!-- Note the order that entries are placed against the
+       objectDefinitionSource is critical.  The
+       FilterSecurityInterceptor will work from the top of the list
+       down to the FIRST pattern that matches the request URL.
+       Accordingly, you should place MOST SPECIFIC (ie a/b/c/d.*)
+       expressions first, with LEAST SPECIFIC (ie a/.*) expressions
+       last .  -->
+
+  <!-- Note that, at present none of the "add" or "list" links in
+       siteindex.jsp actually works.  So I've restricetd access to
+       this page just to administartors, primarily as a way of showing
+       that admin works and has an effective different role. -->
+
+  <bean id="filterInvocationInterceptor"
+        class="net.sf.acegisecurity.intercept.web.FilterSecurityInterceptor">
+    <property name="authenticationManager">
+    <ref bean="authenticationManager"/>
+    </property>
+    <property name="accessDecisionManager">
+      <ref local="httpRequestAccessDecisionManager"/>
+    </property>
+    <property name="objectDefinitionSource">
+      <value>
+        CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
+        PATTERN_TYPE_APACHE_ANT
+        /signin.jsp=ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN        
+        /index.jsp=ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN        
+        /help.jsp=ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN
+        /logout.jsp=ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN
+        /article.jsp=ROLE_ANONYMOUS,ROLE_USER,ROLE_ADMIN
+        /siteindex.jsp=ROLE_ADMIN
+        /report.jpg*=ROLE_USER,ROLE_ADMIN
+        /*.html*=ROLE_USER,ROLE_ADMIN
+        /*.jsp=ROLE_USER,ROLE_ADMIN
+      </value>
+    </property>
+  </bean>
+</beans>

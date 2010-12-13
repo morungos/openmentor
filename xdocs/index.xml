@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<document>
+<properties>
+<title>OpenMentor</title>
+<author email="ian.craw@openability.co.uk">OpenMentor</author>
+</properties>
+<body>
+<section name="OpenMentor">
+<p>
+This is the <a href="http://maven.apache.org/">Maven</a> web site
+for OpenMentor.
+</p>
+<p>
+The development environment for Open Mentor has now been completed,
+by and large. It is based on Eclipse running under Java JDK 1.5.0. We
+are also using <a href="http://maven.apache.org/">Maven</a> and 
+<a href="http://subversion.tigris.org/">Subversion</a>. For full 
+details of how to install
+the development environment, see:
+<a href="buildenv.html">the build environment page</a>.
+</p>
+<p>
+Throughout the development process, we will be running two separate
+versions of Open Mentor, available through the links below. Feel free
+to dip into these systems and try them out.
+</p>
+<ul>
+<li>Development version - 
+<a href="http://openmentor.comp.rgu.ac.uk/development/">http://openmentor.comp.rgu.ac.uk/development/</a></li>
+<li>Stable version - 
+<a href="http://openmentor.comp.rgu.ac.uk/stable/">http://openmentor.comp.rgu.ac.uk/stable/</a> (version 1.0a1)</li>
+</ul>
+<p>
+The development version is updated on a daily basis, and is likely to 
+contain a fair number of bugs. However, it does reflect current
+development work, and issues will be signed off against this version
+of the system. 
+</p>
+</section>
+<section name="Source code">
+<p>
+All the source code for OpenMentor is available at our Subversion
+repository, at: 
+<source><a href="http://openmentor.comp.rgu.ac.uk/svn/openmentor/">http://openmentor.comp.rgu.ac.uk/svn/openmentor/</a></source>
+This is accessible by anyone for reading. If you want to be able to write
+to this repository, contact the maintainers, Colin Beagrie &lt;cb@comp.rgu.ac.uk&gt;
+and Stuart Watt &lt;S.N.K.Watt@rgu.ac.uk&gt;
+</p>
+</section>
+</body>
+</document>

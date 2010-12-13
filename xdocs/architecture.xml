@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<document>
+  
+  <properties>
+    <author email="S.N.K.Watt@rgu.ac.uk">Stuart Watt</author>
+    <title>
+      Open Mentor system architecture
+    </title>
+  </properties>
+  
+  <body>
+    <section name="Open Mentor system architecture">
+      <p>
+      This page describes the overall architecture of the Open Mentor system,
+      and should be a useful reference to anyone wanting to use bits of it,
+      modify it, add new components or elements, and generally work within
+      the framework. 
+      </p>
+      <subsection name="Overview">
+      <p>
+      Open Mentor uses a component-based framework, namely that the 
+      <a href="http://www.springframework.org/">Spring application framework.</a>
+      Spring makes it easy to add and revise components, so that a fair
+      amount of configuration can be completed without needing to 
+      touch a line of Java code underneath. Most of the configuration
+      is managed by a few XML files buried inside the built WAR file:
+      these use <a href="http://www.martinfowler.com/articles/injection.html">
+      dependency injection</a> to assemble Open Mentor from its 
+      constituent components. In particular, it should be possible to
+      adapt Open Mentor to most institutional needs without having to
+      actually build the environment from scratch. At the worst, you 
+      might need to edit a number of XML files.
+      </p>
+      <p>
+      Open Mentor uses a fair number of components in practice, covering
+      everything from text classification to data access - these are 
+      all bounded by well-defined interface classes, and any component
+      which matches the corresponding interface can be dropped into the
+      Open Mentor framework and used as a replacement for, or as a 
+      wrapper around, these components. 
+      </p>
+      <p>
+      To run, Open Mentor depends on the following main components:
+      </p>
+      <ul>
+        <li>A data source for course information, and lists of students 
+            and tutors</li>
+        <li>A data source for use within Open Mentor, to store assignments,
+            submissions, and classified comments</li>
+        <li>A classifier, which can categorise tutor comments</li>
+        <li>An extractor, which can read tutor comments from word-processed
+            files</li>
+        <li>An evaluation scheme description, which defines the classes
+            of comments, the grading bands, and the expected benchmarks</li>
+        <li>A logic component, which applies the evaluation scheme to the
+            classified comments</li>
+      </ul>
+      <p>The overall framework looks something like this:</p>
+      <img src="images/architecture.gif" 
+           alt="Architecture of the core of Open Mentor"/>
+      <p>
+      The Open Mentor framework provides standard (and configurable) 
+      implementations of all of these components, but it is OK to add
+      new components if needed. The most obviously likely of these is the
+      data source for course information, which may typically be modified
+      to read this information from an external virtual learning 
+      environment, such as Moodle. We intend to provide a Moodle course
+      information component before the end of the project. 
+      </p>
+      <p>
+      In addition to these, there are a number of other components which
+      are principally used internally, and within the Spring framework,
+      to provide transaction management, data access, authentication and
+      security. However, you're less likely to need to work with 
+      these; look at the Spring configuration files for more information.
+      </p>
+      </subsection>
+   </section>
+  </body>
+</document>
+

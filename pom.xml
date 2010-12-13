@@ -1,0 +1,370 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>openmentor</groupId>
+  <artifactId>openmentor</artifactId>
+  <packaging>war</packaging>
+  <name>OpenMentor</name>
+  <version>0.95-dev</version>
+  <description>
+    This demonstrator is designed to show the range of tools and
+    recommendations available to a modern Java (web) applications.  It
+    aim to show how the tools should be used and the setup need to
+    make them interact simply.  In particular, this demo builds using
+    either ant or maven.
+  </description>
+  <url>http://openmentor.comp.rgu.ac.uk/development</url>
+  <issueManagement>
+    <system>Scarab</system>
+    <url>http://openmentor.comp.rgu.ac.uk/scarab/issues/</url>
+  </issueManagement>
+  <scm>
+    <connection>
+      scm:svn:http://stuart@openmentor.comp.rgu.ac.uk/svn/openmentor/trunk
+    </connection>
+    <developerConnection/>
+    <tag/>
+    <url/>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Denise Whitelock</name>
+      <id>denise</id>
+      <email>D.M.Whitelock@open.ac.uk</email>
+      <organization>Institute of Educational Technology, The Open University</organization>
+      <timezone>0</timezone>
+    </developer>
+    <developer>
+      <name>Stuart Watt</name>
+      <id>stuart</id>
+      <email>S.N.K.Watt@rgu.ac.uk</email>
+      <organization>School of Computing, The Robert Gordon University, Aberdeen</organization>
+      <url>http://www.comp.rgu.ac.uk/staff/sw</url>
+      <timezone>0</timezone>
+    </developer>
+    <developer>
+      <name>Jan Rae</name>
+      <id>jan</id>
+      <email>J.L.Rae@open.ac.uk</email>
+      <organization>Institute of Educational Technology, The Open University</organization>
+      <timezone>0</timezone>
+    </developer>
+    <developer>
+      <name>Ian Craw</name>
+      <id>ian</id>
+      <email>Ian.Craw@openability.co.uk</email>
+      <organization>Openability Consulting</organization>
+      <url>www.openability.co.uk</url>
+      <timezone>0</timezone>
+    </developer>
+    <developer>
+      <name>Colin Beagrie</name>
+      <id>colin</id>
+      <email>cb@comp.rgu.ac.uk</email>
+      <organization>School of Computing, The Robert Gordon University</organization>
+      <timezone>0</timezone>
+    </developer>
+    <developer>
+      <name>Will Woods</name>
+      <id>will</id>
+      <email>W.I.S.Woods@open.ac.uk</email>
+      <organization>Institute of Educational Technology, The Open University</organization>
+      <timezone>0</timezone>
+    </developer>
+    <developer>
+      <name>Maggie Nicol</name>
+      <id>maggie</id>
+      <email>mn@comp.rgu.ac.uk</email>
+      <organization>School of Computing, The Robert Gordon University</organization>
+      <timezone>0</timezone>
+    </developer>
+    <developer>
+      <name>Hassan Sheikh</name>
+      <id>hassan</id>
+      <email>M.U.H.Sheikh@open.ac.uk</email>
+      <organization>Institute of Educational Technology, The Open University</organization>
+      <timezone>0</timezone>
+    </developer>
+  </developers>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <organization>
+    <name>The OpenMentor Team</name>
+    <url>http://www.openmentor.org.uk</url>
+  </organization>
+  <inceptionYear>2004</inceptionYear>
+  <!--    <logo>http://openmentor.comp.rgu.ac.uk/images/omlogo.jpg</logo>
+       <siteDirectory>/usr/local/web</siteDirectory> -->
+  <build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+
+
+    <plugins>
+      <plugin>
+        <!-- We need java 5 from revision 495 (SerialBlob) -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.5</source>
+          <target>1.5</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>>**/All*Tests.java</exclude>
+            <!-- The next fails: see Scarab IssueID OM13 -->
+            <exclude>**/CourseInfoControllerTest.java</exclude>
+            <!-- There are no tests in the next two -->
+            <exclude>**/BaseDAOTestCase.java</exclude>
+            <exclude>**/ClassifierTest.java</exclude>
+            <!-- Comment out the next line to do integration testing. -->
+            <exclude>**/*WebTestCase.java</exclude>
+            <!-- And again this contains no tests. -->
+            <exclude>**/*BaseWebTestCase.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId> 
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <!-- Hibernate mapping files -->
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>${basedir}/src/conf</directory>
+        <includes>
+          <include>*.properties</include>
+        </includes>
+        <filtering>false</filtering>
+      </resource>
+      <resource>
+        <!-- Hibernate mapping files -->
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+      <resource>
+        <!-- Other resources -->
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*</include>
+        </includes>
+      </resource>
+    </resources>
+    <testResources>
+      <testResource>
+        <directory>src/main/webapp</directory>
+        <includes>
+          <include>WEB-INF/applicationContext.xml</include>
+          <include>WEB-INF/action-servlet.xml</include>
+          <include>WEB-INF/validation.xml</include>
+          <include>WEB-INF/validator-rules.xml</include>
+        </includes>
+      </testResource>
+      <testResource>
+        <!-- Hibernate mapping files -->
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </testResource>
+      <testResource>
+        <directory>${basedir}/src/conf</directory>
+        <includes>
+          <include>*.properties</include>
+        </includes>
+        <filtering>false</filtering>
+      </testResource>
+    </testResources>
+  </build>
+  <dependencies>
+    <!-- Used to do authentication.  Although it is only needed at the
+         moment at runtime, many dependencies are used to compile and
+         test -->
+    <dependency>
+      <groupId>acegisecurity</groupId>
+      <artifactId>acegi-security</artifactId>
+      <version>0.9.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>aopalliance</groupId>
+          <artifactId>aopalliance</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>springframework</groupId>
+          <artifactId>spring</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>springframework</groupId>
+          <artifactId>spring-mock</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>cas</groupId>
+          <artifactId>casclient</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>jcifs</groupId>
+          <artifactId>jcifs</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>aspectj</groupId>
+          <artifactId>aspectjrt</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>directory</groupId>
+          <artifactId>apacheds-main</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- Needed directly by openmentor. -->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.0</version>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- Needed directly by openmentor. -->
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <!-- Just used to indirect to log4j logging.  -->
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.0.4</version>
+    </dependency>
+    <!-- Validating web page inputs. -->
+    <dependency>
+      <groupId>commons-validator</groupId>
+      <artifactId>commons-validator</artifactId>
+      <version>1.1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate</artifactId>
+      <version>3.0.5</version>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- Only jcharts-0.6.0 is on ibiblio - and it causes failures. -->
+    <dependency>
+      <groupId>jCharts</groupId>
+      <artifactId>jCharts</artifactId>
+      <version>0.7.5</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>3.1.11</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>opensymphony</groupId>
+      <artifactId>sitemesh</artifactId>
+      <version>2.2.1</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring</artifactId>
+      <version>1.2.5</version>
+      <exclusions>
+        <exclusion>
+          <groupId>quartz</groupId>
+          <artifactId>quartz</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-support</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-orm</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-hibernate</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-core</artifactId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-attributes-compiler</artifactId>
+          <groupId>commons-attributes</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- Again used in unit tests. -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-mock</artifactId>
+      <version>1.2.5</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Used to read Word files -->
+    <dependency>
+      <groupId>poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>2.5.1-final-20040804</version>
+    </dependency>
+    <!-- This was in spring-sandbox -->
+    <dependency>
+      <groupId>springmodules</groupId>
+      <artifactId>springmodules-validator</artifactId>
+      <version>0.1</version>
+      <scope>runtime</scope>
+    </dependency>
+    <!-- Tests were failing without some form of xerces -->
+    <dependency>
+      <groupId>xerces</groupId>
+      <artifactId>xercesImpl</artifactId>
+      <version>2.6.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>jwebunit</groupId>
+      <artifactId>jwebunit</artifactId>
+      <version>1.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <reporting>
+    <plugins>     
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>changelog-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+      </plugin> 
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+     </plugins>
+  </reporting>
+  <distributionManagement>
+    <site>
+      <id>website</id>
+      <url>scp://www.openmentor.org.uk/openmentor</url>
+    </site>
+  </distributionManagement>
+</project>

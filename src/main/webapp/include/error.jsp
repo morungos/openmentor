@@ -1,0 +1,1 @@
+An error has occured. Please go back to <a href=viewreports.jsp>reports page</a> and try a different report!

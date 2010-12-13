@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="viewResolver" 
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="viewClass">      
+      <value>org.springframework.web.servlet.view.JstlView</value>
+    </property>
+    <property name="prefix"><value>/</value></property>
+    <property name="suffix"><value>.jsp</value></property>
+  </bean>
+  
+  <bean name="openSessionInViewInterceptor"  
+        class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
+    <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+  </bean>
+  
+  <bean id="urlMapping" 
+        class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="interceptors">
+      <list>
+        <ref bean="openSessionInViewInterceptor"/>
+      </list>
+    </property>
+    <property name="mappings">
+      <props>
+        <prop key="/selectCourse.html">courseInfoController</prop>
+        <prop key="/selectAssignment.html">selectAssignmentController</prop>
+        <prop key="/listAssignments.html">assignmentController</prop>
+        <prop key="/editAssignment.html">assignmentFormController</prop>
+        <prop key="/fileUpload.html">fileUploadController</prop>
+        <prop key="/analysis.html">analysisController</prop>
+        <prop key="/listReports.html">reportListController</prop>
+        <prop key="/report.jpg">reportController</prop>
+        <prop key="/report.html">reportController</prop>
+      </props>
+    </property>
+  </bean>
+  
+  <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+  
+  <bean id="analysisController"
+       class="uk.org.openmentor.web.AnalysisController">
+    <property name="assignmentManager">
+      <ref bean="assignmentManager"/>
+    </property>
+    <property name="evaluator">
+      <ref bean="evaluator"/>
+    </property>
+  </bean>
+  
+  <bean id="reportController"
+       class="uk.org.openmentor.web.ReportController">
+    <property name="businessLogic">
+      <ref bean="businessLogic"/>
+    </property>
+  </bean>
+  
+  <bean id="reportListController"
+       class="uk.org.openmentor.web.ReportListController">
+    <property name="courseInfoManager">
+      <ref bean="courseInfoManager"/>
+    </property>
+    <property name="modelManager">
+      <ref bean="modelManager"/>
+    </property>
+  </bean>
+  
+  <bean id="fileUploadController"
+        class="uk.org.openmentor.web.FileUploadController">
+    <property name="analyzer"><ref bean="analyzer"/></property>
+    <property name="courseInfoManager">
+      <ref bean="courseInfoManager"/>
+    </property>
+    <property name="assignmentManager">
+      <ref bean="assignmentManager"/>
+    </property>
+    <property name="commandName"><value>uploadData</value></property>
+    <property name="commandClass">
+      <value>uk.org.openmentor.model.UploadData</value>
+    </property>
+    <property name="formView"><value>selectAssignment</value></property>
+    <property name="successView"><value>uploaded</value></property>
+  </bean>
+  
+  <bean id="messageSource" 
+        class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basename"><value>messages</value></property>
+  </bean>
+  
+  <!-- Assignment management -->
+  <bean id="assignmentController" 
+        class="uk.org.openmentor.web.SimpleAssignController">
+    <property name="assignmentManager">
+      <ref bean="assignmentManager"/>
+    </property>
+  </bean>
+  
+ <!-- Assignment form management -->
+  <bean id="assignmentFormController" 
+        class="uk.org.openmentor.web.SimpleAssignFormController">
+    <property name="commandName"><value>assignment</value></property>
+    <property name="commandClass">
+      <value>uk.org.openmentor.model.Assignment</value>
+    </property>
+    <property name="assignmentManager">
+      <ref bean="assignmentManager"/>
+    </property>
+    <property name="formView"><value>assignmentForm</value></property>
+    <property name="successView">
+      <value>redirect:listAssignments.html</value>
+    </property>
+    <property name="validator"><ref bean="beanValidator"/></property>
+  </bean>
+  
+  <!-- Course management -->
+  <bean id="selectAssignmentController" 
+        class="uk.org.openmentor.web.AssignmentController">
+    <property name="assignmentManager">
+      <ref bean="assignmentManager"/>
+    </property>
+    <property name="courseInfoManager">
+      <ref bean="courseInfoManager"/>
+    </property>
+    <!-- Don't know why I can't associate a command class. (igc) -->
+  </bean>
+  
+  <!-- Course management -->
+  <bean id="courseInfoController" 
+        class="uk.org.openmentor.web.CourseInfoController">
+    <property name="courseInfoManager">
+      <ref bean="courseInfoManager"/>
+    </property>
+  </bean>
+  
+  <!-- Validation -->
+  <bean id="validatorFactory" 
+        class="org.springmodules.commons.validator.DefaultValidatorFactory">
+    <property name="validationConfigLocations">
+      <list>
+        <value>/WEB-INF/validator-rules.xml</value>
+        <value>/WEB-INF/validation.xml</value>
+      </list>
+    </property>
+  </bean>
+  
+  <bean id="beanValidator" 
+        class="org.springmodules.commons.validator.DefaultBeanValidator">
+    <property name="validatorFactory">
+      <ref local="validatorFactory"/>
+    </property>
+  </bean>
+</beans>

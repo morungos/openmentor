@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>
+      The Open Mentor analyzer package.
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  </head>
+  <body>
+    <h2>Analyzers.</h2>
+    <p>
+      Analyzers are used in Open Mentor to generate a 
+      <code>Submission</code> object for an uploaded file. They
+      use a reference to an <code>Extractor</code> and to a 
+      <code>Classifier</code>, both set through dependency
+      injection. The package consists solely of an interface,
+      <code>Analyzer</code> that provides one main method,
+      <code>addSubmission</code>, which, given a set of 
+      parameters, processes an uploaded file and generates
+      a new <code>Submission</code> object for persistent
+      storage. 
+    </p>
+  </body>
+</html>

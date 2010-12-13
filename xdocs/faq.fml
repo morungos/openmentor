@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faqs title="Frequently Asked Questions">
+
+  <part id="general">
+    <title>General</title>
+   
+    <faq id="whats-open-mentor">
+      <question>
+        What is Open Mentor?
+      </question>
+      <answer>
+        <p>Open Mentor is a learning support tool for tutors that provides
+      	   reflective comments on their assessment of and feedback to
+      	   students, resulting from the marking of their students'
+      	   electronic assessments.</p>
+        
+        <p>The teaching model underlying the system recognises that students need an explicit level of socio-emotive 
+			support as well as direct instruction.  It recommends tutors praise the student for their achievement.  
+			Point out mistakes in a constructive manner and offer explicit direction for student improvement in a specific 
+			piece of work and for future assignments.  It is especially important that the feedback students receive from 
+			teaching staff provides both the subject specific guidance they require and the support they need for further 
+			development. Initial research showed (see Whitelock et al. 2003) that there was convincing evidence of systematic 
+			connections between different types of tutor comments and level of attainment in assessment and this was the 
+			platform for the development of Open Mentor.</p>
+			
+		<p>Whitelock, D., Watt, S., Raw, Y. and Moreale, E. (2004) Analysing tutor feedback to students: first steps towards 
+			constructing an electronic monitoring system.  Association for Learning Technology Journal (ALT-J), 
+			Volume 11, No. 3.pp.31-42 ISSN 0968-7769.
+			<a href="http://openmentor.comp.rgu.ac.uk/development/article.jsp">http://openmentor.comp.rgu.ac.uk/development/article.jsp</a></p>
+      </answer>
+    </faq>
+  </part>
+  
+  <part id="technology">
+    <title>Technology</title>
+    
+    <faq id="what-technology">
+      <question>
+        What technology does Open Mentor use?
+      </question>
+      <answer>
+        <p>Open Mentor is written in Java, and runs as a standard servlet-based web application.
+        	The main technologies we are using are as follows:</p>
+        <ul>
+        	<li>Java, version 1.4.2 or greater</li>
+        	<li>Apache Maven</li>
+        	<li>Apache Tomcat</li>
+        	<li>jCharts</li>
+        	<li>Spring Application Framework</li>
+        	<li>Hibernate</li>
+        	<li>Apache Jakarta POI</li>
+        </ul>
+        <p>Most version information is covered in the <a href="dependencies.html">Dependencies</a> page. 
+        	The development environment for Open Mentor is described in more detail in our
+        	<a href="buildenv.html">Development Environment</a> page.</p>
+      </answer>
+    </faq>
+   
+    <faq id="how-does-it-extract-comments">
+      <question>
+        How does Open Mentor extract comments?
+      </question>
+      <answer>
+        <p>Open Mentor uses the <a href="http://jakarta.apache.org/poi/">Apache POI</a> package to open 
+            Microsoft Word files, and read the comment "balloon" annotations from inside them. Earlier
+            versions of Open Mentor used <a href="http://www.openoffice.org/">OpenOffice</a> behind the
+            scenes, and got it to convert Word files into an XML representation that it could parse to
+            extract the comments. This worked, but was slow; the POI approach is very much faster and
+            means that the Open Mentor server does not need a constantly running copy of OpenOffice.</p>
+      </answer>
+    </faq>
+    <faq id="errors-building-reports">
+      <question>
+        I get a NullPointerException sometimes when I try to build the
+        reports.  Should I expect this?
+      </question>
+      <answer>
+        <p>
+          Well I guess you shouldn't <em>expect</em> one, but it can
+          happen.  You may be able to get rid of it; when this was
+          written it seemd possible to remove the problem by
+          commenting out the last two dependecies from
+          <tt>pom.xml</tt>.
+        </p>
+        <p>
+          This has been logged.  You will see in <a
+          href="http://jira.codehaus.org/browse/MNG-1663">JIRA</a>
+          that it has been fixed in maven-2.0.1, although that hasn't
+          been released yet.
+        </p>
+      </answer>
+    </faq>
+  </part>
+
+   <part id="security">
+     <title>Security</title>
+     
+     <faq id="authentication">
+       <question>What is OpenMentor doing about authentication?</question>
+       <answer>
+         <p>
+           In the early version, authentication was mocked up to
+           indicate it was regarded as an essential ingedient of a
+           full system.  Clearly the "admin" section of the site needs
+           greater protection than the rest, while it probably makes
+           sense to rreqire users to register nefore making any use of
+           the facilities.
+         </p>
+         <p>
+           In the current phase the aim is to put in place all the
+           needed hooks, while at the same time allowing development
+           and review without too much formality.  At present the only
+           user has a password configured in the
+           <code>applicationContent-security.xml</code> configuration
+           file.  There is reasonable security in that passwords are
+           stored sha1 encoded.  However at this stage in the
+           development, the passwords are also given in plain text in
+           comments in the file!
+         </p>
+       </answer>
+     </faq>
+
+     <faq id="jaas">
+       <question> What about JAAS</question>
+       <answer>The system used, the 
+       <a href="http://acegisecurity.sourceforge.net/">Acegi Security
+       system for Spring</a> is able to use Java Authentication and
+       Authorization Service 
+       (<a href="http://java.sun.com/products/jaas/">jaas</a>), although
+       at present it is simply file based.
+       </answer>
+     </faq>  
+  </part>
+
+</faqs>

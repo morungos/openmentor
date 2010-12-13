@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id: navigation.xml,v 1.2 2003/04/09 15:38:26 igc Exp $ -->
+<project name="Open Mentor" href="http://openmentor.comp.rgu.ac.uk">
+
+  <title>Open Mentor</title>
+
+  <body>
+  
+    <links>
+      <item name="OpenMentor"  href="http://openmentor.comp.rgu.ac.uk"/>
+      <item name="JISC" href="http://www.jisc.ac.uk/"/>
+      <item name="Openability" href="http://www.openability.co.uk/openmentor"/>
+    </links>
+
+    <menu name="Open Mentor">
+      <item name="Overview"                 href="/index.html"/>
+    </menu>
+    
+    <menu name="Development">
+      <item name="System architecture"      href="architecture.html"/>
+      <item name="Development Environment"  href="/buildenv.html"/>
+    </menu>
+    
+  </body>
+</project>

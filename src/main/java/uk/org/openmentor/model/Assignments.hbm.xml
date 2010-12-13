@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="uk.org.openmentor.model">
+  <class name="Assignment" table="tbl_assignment">
+    <id name="id" column="id" type="int">
+      <generator class="increment"/>
+    </id>
+    <property name="courseId" type="string">
+      <column name="course_id" length="16" not-null="true" 
+              unique="false" index="course_id_index"/>
+    </property>
+    <property name="assignmentTitle" column="assignment_title" 
+              type="string" length="255" not-null="true"/>
+    <set name="submissions" table="tbl_submissions"
+         lazy="true" cascade="all-delete-orphan">
+      <key column="assignment_id"/>
+      <one-to-many class="Submission"/>
+    </set>
+  </class>
+  
+  <class name="Submission" table="tbl_submission">
+    <id name="id" column="id" type="int">
+      <generator class="increment"/>
+    </id>
+    <property name="body" type="blob"/>
+    <property name="filename" type="string"/>
+    <property name="type" type="string"/>
+    <property name="grade" type="string"/>
+    <set name="students" table="tbl_submission_students"
+         lazy="true" cascade="all-delete-orphan">
+      <key column="submission_id"/>
+      <element column="student_id" type="string" length="16"/>
+    </set>
+    <set name="tutors" table="tbl_submission_tutors"
+         lazy="true" cascade="all-delete-orphan">
+      <key column="submission_id"/>
+      <element column="tutor_id" type="string" length="16"/>
+    </set>
+    <set name="comments" table="tbl_submission_comments"
+         lazy="true" cascade="all-delete-orphan">
+      <key column="submission_id"/>
+      <one-to-many class="Comment"/>
+    </set>
+  </class>
+  
+  <class name="Comment" table="tbl_comment">
+    <id name="id" column="id" type="int">
+      <generator class="increment"/>
+    </id>
+    <property name="text" type="text"/>
+    <set name="classes" table="tbl_comment_classes"
+         lazy="true" cascade="all-delete-orphan">
+      <key column="comment_id"/>
+      <element column="category_name" type="string" length="8"/>
+    </set>
+  </class>
+</hibernate-mapping>

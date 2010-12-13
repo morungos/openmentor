@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>
+      The Openmentor service package.
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  </head>
+  <body>
+    <h2>A web friendly model.</h2>
+    <p>
+      This package aims to represent the model in a more integrated
+      and helpful way.  Thus the model itself has no reference to the
+      fact that it is persistent; hence the availability of eg a
+      <code>saveAssigment(Assignment ass)</code> method in this
+      package.  This package also incorporates what (in the language
+      of Torque) are Peer methods; those like
+      <code>getAssigments(String courseId)</code> which are concerned
+      with <strong>all</strong> assignments of a particular sort,
+      rather than one particular instance.
+    </p>
+    <p>
+      The package also aims to be web-friendly.  Typically this means
+      having <code>String</code> arguments, simply because that is
+      what is needed at the web level, alowing eg necessary
+      conversions of an <code>id</code> to an <code>int</code> to be
+      hidden here.
+    </p>
+  </body>
+</html>

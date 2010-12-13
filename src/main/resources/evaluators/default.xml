@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<evaluator id="1" name="Standard evaluator">
+  <version><major>1</major><minor>0</minor><sub>0</sub></version>
+  <revised>21st January 2005</revised>
+  <description>Initial evaluator rules</description>
+  <bands>
+    <band name="1" description="Fail"/>
+    <band name="2" description="Bare fail"/>
+    <band name="3" description="Satisfactory"/>
+    <band name="4" description="Good"/>
+    <band name="5" description="Excellent"/>
+    <band name="6" description="Outstanding"/>
+  </bands>
+<!-- We use the category entity to describe the categories used for
+     display.  The ruleset has a possible finer concept of category
+     which we call here a rulecategory.  Each of the categories below
+     describes how these are aggregated into (display) categories.  If
+     there is a direct translation between the two, and they each have
+     the same name, there is no need to specify a corresponding
+     rulecategory.-->
+  <categories>
+    <category name="A" description="Positive reactions">
+      <rulecategory name="A1"/>
+      <rulecategory name="A2"/>
+      <rulecategory name="A3"/>
+    </category>
+    <category name="B" description="Teaching points">
+      <rulecategory name="B1"/>
+      <rulecategory name="B2"/>
+      <rulecategory name="B3"/>
+      <rulecategory name="B5"/>
+    </category>
+    <category name="C" description="Questions">
+      <rulecategory name="C1"/>
+      <rulecategory name="C2"/>
+    </category>
+    <category name="D" description="Negative reactions">
+      <rulecategory name="D1"/>
+    </category>
+    <!-- The next one isn't a category, in that it is not used for
+         graphing; but it *is* used as a category to label comments
+         that have been placed in no category.  Sigh! -->
+    <defaultcategory name="E" description="Other comments"/>
+  </categories>
+  <!-- Note that each category must have a proportion declared, even
+       if it is zero. -->
+  <proportionmap>
+    <proportions band="1">
+      <proportion category="A" value="0.2"/>
+      <proportion category="B" value="0.5"/>
+      <proportion category="C" value="0.2"/>
+      <proportion category="D" value="0.1"/>
+    </proportions>
+    <proportions band="2">
+      <proportion category="A" value="0.25"/>
+      <proportion category="B" value="0.45"/>
+      <proportion category="C" value="0.2"/>
+      <proportion category="D" value="0.1"/>
+    </proportions>
+    <proportions band="3">
+      <proportion category="A" value="0.3"/>
+      <proportion category="B" value="0.4"/>
+      <proportion category="C" value="0.2"/>
+      <proportion category="D" value="0.1"/>
+    </proportions>
+    <proportions band="4">
+      <proportion category="A" value="0.35"/>
+      <proportion category="B" value="0.35"/>
+      <proportion category="C" value="0.2"/>
+      <proportion category="D" value="0.1"/>
+    </proportions>
+    <proportions band="5">
+      <proportion category="A" value="0.4"/>
+      <proportion category="B" value="0.3"/>
+      <proportion category="C" value="0.2"/>
+      <proportion category="D" value="0.1"/>
+    </proportions>
+    <proportions band="6">
+      <proportion category="A" value="0.45"/>
+      <proportion category="B" value="0.25"/>
+      <proportion category="C" value="0.2"/>
+      <proportion category="D" value="0.1"/>
+    </proportions>
+  </proportionmap>
+</evaluator>

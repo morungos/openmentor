@@ -1,0 +1,53 @@
+<!ELEMENT dataset (
+    TblAssignment|
+    TblComment|
+    TblCommentClasses|
+    TblSubmission|
+    TblSubmissionStudents|
+    TblSubmissionTutors)*>
+<!ATTLIST dataset
+    name CDATA #REQUIRED
+>
+
+<!ELEMENT TblAssignment EMPTY>
+<!ATTLIST TblAssignment
+    Id CDATA #REQUIRED
+    CourseId CDATA #REQUIRED
+    AssignmentTitle CDATA #REQUIRED
+>
+
+<!ELEMENT TblComment EMPTY>
+<!ATTLIST TblComment
+    Id CDATA #REQUIRED
+    Text CDATA #IMPLIED
+    SubmissionId CDATA #IMPLIED
+>
+
+<!ELEMENT TblCommentClasses EMPTY>
+<!ATTLIST TblCommentClasses
+    CommentId CDATA #REQUIRED
+    CategoryName CDATA #IMPLIED
+>
+
+<!ELEMENT TblSubmission EMPTY>
+<!ATTLIST TblSubmission
+    Id CDATA #REQUIRED
+    Body CDATA #IMPLIED
+    Filename CDATA #IMPLIED
+    Type CDATA #IMPLIED
+    Grade CDATA #IMPLIED
+    AssignmentId CDATA #IMPLIED
+>
+
+<!ELEMENT TblSubmissionStudents EMPTY>
+<!ATTLIST TblSubmissionStudents
+    SubmissionId CDATA #REQUIRED
+    StudentId CDATA #IMPLIED
+>
+
+<!ELEMENT TblSubmissionTutors EMPTY>
+<!ATTLIST TblSubmissionTutors
+    SubmissionId CDATA #REQUIRED
+    TutorId CDATA #IMPLIED
+>
+

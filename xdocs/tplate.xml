@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <author email="Ian.Craw@maths.abdn.ac.uk">Ian Craw</author>
+    <title>
+      An Introduction to the Design of OpenCAA
+    </title>
+  </properties>
+
+  <meta name="keyword" content="CAA, java"/>
+
+  <body>
+
+    <section name="Introduction">
+      <p>
+        In this document I try to describe some of the design decisions which
+        went into the start of OpenCAA.  A more leisurely introduction
+        to the can be found <a href="web.html">here</a>
+      </p>
+      
+      <p> At present, I can't manage a controlled maven build and
+        install although much Maven functionality works flawlessly.
+        So I'm running builds both with Maven and directly with Ant.
+      </p>
+      <table>
+          <tr>
+          <td>This is a table</td>
+        </tr>
+      </table>
+      
+      <ul>
+        <li>This is an unordered list.</li>
+      </ul>
+      
+    </section>
+    
+    <section name="Section 2">
+      <p>
+        This is section 2.
+      </p>
+      
+      <ol>
+        <li>This is an ordered list.</li>
+      </ol>
+    </section>
+    
+    <section name="Section 3">
+      <p>
+        This is section 3.
+      </p>
+      
+      <source>
+        Anything within this tag is rendered as a "box"
+        with blue lines and <pre></pre> tags around it.
+      </source>
+      
+      <subsection name="Subsection of Section 3">
+        <p>
+          This is the subsection 3.
+        </p>
+      </subsection>
+    </section>
+    
+  </body>
+</document>
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: xml
+sgml-indent-step:2
+sgml-indent-data:t
+End:
+-->

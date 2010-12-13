@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!-- There is a problem with sitemesh decorating error pages        -->
+<!-- and with the fact that I need access under all circumstances   -->
+<!-- to this page, so perhaps it is better not to have it as a jsp. -->
+<!-- One way out is via picking up errors in the login form; see    -->
+<!-- appfuse 1.8.2.  For the time being, lets do it by hand.        -->
+  <head>
+    <title>
+      OpenMentor - login problem.
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <link href="images/favicon.ico" rel="shortcut icon"/>
+    <link href="om.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div id="logoAtLeft">
+      <a href="index.jsp">
+        <img src="images/OMLogo.jpg" border="0" alt="OpenMentor Home"/>
+      </a>
+    </div>
+    <div id="centerHeader">
+      <h2 class="sitehead">
+        Openmentor: Login Problem
+      </h2>
+    </div>
+    <hr/>
+    <p>
+    The was a problem with your login - please 
+    <a href="signin.jsp">try again</a>.
+    </p>
+    <hr/>
+    <table width="100%">
+      <tr>
+        <td colspan="2" width="15%" align="right">
+          <a href="http://iet.open.ac.uk">
+            <img name="ietlogo" src="images/ietlogo.gif" border="0" 
+                 alt="Institute of Educational Technology"/>
+          </a>
+          <a href="http://www.smartweb.rgu.ac.uk">
+            <img name="smartweblogo" src="images/smartweb_logo.gif" border="0"
+                 alt="Smart Web Technologies Centre"/>
+          </a>
+        </td>
+        <td colspan="2" class="footer" width="70%" valign="top">
+          Developed by the Institute of Educational Technology at the Open
+          University and the Smart Web Technologies Centre at the Robert
+          Gordon University, with support from JISC
+        </td>
+        <td width="15%" align="left">
+          <a href="http://www.jisc.ac.uk">
+            <img name="jisc" src="images/jisc.gif" width="51" height="33" border="0" 
+                 alt="JISC"/>
+          </a>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

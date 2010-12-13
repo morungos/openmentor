@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+<document>
+  
+  <properties>
+    <author email="S.N.K.Watt@rgu.ac.uk">Stuart Watt</author>
+    <title>
+      Installation of the OpenMentor development environment
+    </title>
+  </properties>
+  
+  <body>
+    <section name="Installation of the OpenMentor development environment">
+      <p>
+      This page describes how to set up the development environment for 
+      Open Mentor. The basic environment is based on Java and Eclipse, 
+      with Maven as the primary build tool. Maven should manage much of the
+      downloading, but not all. However, getting all the tools downloaded, 
+      running, and talking to each other, is something of a challenge. 
+      </p>
+      <p>
+      The following steps should complete the development environment.
+      </p>
+      <ol>  
+        <li>Firefox is the preferred browser for development (it enables 
+            better debugging of JavaScript)
+            <ul>  
+              <li>URL: <a href="http://www.mozilla.org/products/firefox/">
+                       http://www.mozilla.org/products/firefox/
+                       </a></li>
+            </ul>
+        </li> 
+      </ol>
+      <subsection name="Java">
+      <ol start="2">  
+        <li>Install the Java Development Environment, JDK 5.0 Update 4 or more recent
+            <ul>  
+              <li>URL: <a href="http://java.sun.com/j2se/1.5.0/download.jsp">
+                       http://java.sun.com/j2se/1.5.0/download.jsp
+                       </a></li>
+            </ul>
+        </li> 
+        
+        <li>(Optional) Install the J2SE 5.0 Documentation, from the same page. 
+            This is simply a zipped archive, so put it where you like
+            <ul>  
+              <li>URL: <a href="http://java.sun.com/j2se/1.5.0/download.jsp">
+                       http://java.sun.com/j2se/1.5.0/download.jsp
+                       </a></li>
+            </ul>
+        </li> 
+      </ol>
+      </subsection>
+      
+      <subsection name="Eclipse">
+      <ol start="4">  
+        <li>Download the Eclipse IDE
+            <ul>  
+              <li>URL: <a href="http://www.mirror.ac.uk/mirror/download.eclipse.org/eclipse/downloads/drops/R-3.1-200506271435/eclipse-platform-3.1-win32.zip">
+                       http://www.mirror.ac.uk/mirror/download.eclipse.org/eclipse/downloads/drops/R-3.1-200506271435/eclipse-platform-3.1-win32.zip
+                       </a></li>
+            </ul>
+            This is a zip file. Unzip it in an appropriate place. For example, on Windows, use:
+            <source>C:>cd "C:\Program Files"
+C:\Program Files>unzip eclipse-platform-3.1-win32.zip</source>
+        </li> 
+        
+        <li>(Optional) Make a shortcut to the Eclipse executable, 
+            and put it somewhere handy for your environment</li>
+ 
+        <li>Set the proxy settings for Eclipse. Choose Window > Preferences... 
+            then select Install/Update. Check "Enable HTTP proxy connection" and 
+            enter your proxy settings.</li>
+      </ol>
+      </subsection>
+      
+      <subsection name="Java (again)">
+      <ol start="7">  
+        <li>Install the Java Development Tools for Eclipse. Download this 
+            from the same mirror site, and it too is a zip file – install it 
+            by unzipping it into the same directory in the same way.
+        </li> 
+      </ol>
+      <p>Steps 6 and 7 may not always get the Java Tools working in Eclipse. 
+         If Java does not show up, simply repeat these steps and it should. 
+         Check that by looking in Window > Preferences. If Java is listed, 
+         the tools are working. </p>
+      <ol start="8">  
+        <li>Set the JAVA_HOME environment variable. Open the System control 
+            panel, choose the Advanced tab, and then press "Environment Variables". 
+            Under the System environment variables, choose "New..." and add in the 
+            following details:
+            <ul>  
+              <li>Variable name: JAVA_HOME</li>
+              <li>Variable value: C:\Program Files\Java\jdk1.5.0_04 (or equivalent, for your JDK)</li>
+            </ul>
+            You may need to close and re-open and command line windows for this to work. 
+        </li> 
+      </ol>
+      </subsection>
+      
+      <subsection name="Subclipse and Subversion">
+      <ol start="9">  
+        <li>Install Subclipse through the Eclipse plug-in manager. Choose Help > 
+        Software Updates > Find and Install... Choose "Search for new features to install" 
+        then Next, then press New Remote Site and add in the following details:
+            <ul>  
+              <li>Name: Subclipse</li>
+              <li>URL: http://subclipse.tigris.org/update/</li>
+            </ul>
+            Press Finish, and when asked to select the features to install, check 
+            Subclipse and press Next. Continue by agreeing to the license, pressing 
+            Next and completing the wizard. 
+        </li> 
+        
+        <li>Add the OpenMentor repository. In Eclipse, choose Window > Open 
+        Perspective > Other... and select "SVN Repository Exploring". Right-click 
+        in the SVN Repository panel and choose New > Repository Location... Add in 
+        the following details:
+            <ul>  
+              <li>URL: https://openmentor.comp.rgu.ac.uk/svn/openmentor/ </li>
+              <li>Username: your Subversion user name (usually your first name)</li>
+              <li>Password: your Subversion password</li>
+            </ul>
+            NOTE: This operation will fail if you need a proxy, but it will get 
+            Subversion to make all the right files, so you can set the proxy in 
+            the next step. Simply keep the location, and come back to this later.
+        </li> 
+        
+        <li>Set the Subversion proxy settings. Edit the file C:\Documents and 
+        Settings\Administrator\Application Data\Subversion\servers (using notepad) 
+        and set the proxy settings at the end of the file. Typically, this will read:
+            <source>[global]
+http-proxy-host = wwwcache.bath.ac.uk
+http-proxy-port = 3128</source>
+        NOTE: We have found that the SSL version may work better, as the proxy 
+        cannot listen in and will not filter the protocol, or use caching. 
+        </li> 
+        
+        <li>In Eclipse, choose Window > Open Perspective > Other... and select 
+        "SVN Repository Exploring". Use the "+" buttons to open the repository, 
+        and find "trunk". Right-click on "trunk" and choose "Check Out As...". Choose 
+        Java > Java Project and press Next, then give the project a name "OpenMentor 
+        Trunk" and set "Create separate source and output folders". Press Finish and 
+        let Eclipse check out all the files, ignoring the warning about overwriting 
+        an existing project, which is irrelevant. 
+        </li>
+      </ol>
+      </subsection>
+      
+      <subsection name="Maven and Mevenide">
+      <ol start="13">  
+        <li>Install Maven. We used version 1.0.2
+            <ul>  
+              <li>URL: <a href="http://mevenide.codehaus.org/release/eclipse/update/site.xml">
+                       http://maven.apache.org/start/download.html
+                       </a></li>
+            </ul>
+        </li> 
+        
+        <li>Install Mevenide, the Eclipse plug-in for Maven. To do this, start 
+        Eclipse, choose Help > Software Updates > Find and Install... Choose "Search 
+        for new features to install" then Next, then press New Remote Site and add 
+        in the following details:
+            <ul>  
+              <li>Name: Mevenide</li>
+              <li>URL: http://mevenide.codehaus.org/release/eclipse/update/site.xml</li>
+            </ul>
+        Press Finish, and when asked to select the features to install, check 
+        Mevenide and press Next. Continue by agreeing to the license, pressing Next 
+        and completing the wizard. 
+        </li> 
+        
+        <li>Set the Maven proxy details. Create a new text file: C:\Documents and 
+        Settings\Administrator\build.properties (using notepad) and set the proxy 
+        settings as follows. 
+            <source>maven.proxy.host = wwwcache.bath.ac.uk
+maven.proxy.port = 3128</source>
+        </li> 
+        
+        <li>Add the Maven directory to the Path environment variable. Open the 
+        System control panel, choose the Advanced tab, and then press "Environment 
+        Variables". Select the "Path" system environment variable, and choose "Edit...". 
+        Add the value "C:\Program Files\Apache Software Foundation\Maven 1.0.2\bin" 
+        at the end of the value, preceded by ";" to separate it from the previous value.
+        <p>You may need to close and re-open and command line windows for this to work. </p>
+        <p>Check that you can now use the "maven" command from a command-line prompt. </p>
+        </li> 
+        
+        <li>Install the Maven and Tomcat plug-ins for Eclipse, by using the following commands (each on one line):
+            <source>maven plugin:download -DgroupId=maven -DartifactId=maven-eclipse-plugin -Dversion=1.9
+maven plugin:download -DgroupId=codeczar-tomcat -DartifactId=maven-tomcat-plugin -Dversion=1.1</source>
+        </li> 
+ 
+        <li>Tell Eclipse where the Maven repository is. Choose Window > Preferences, 
+        and then select Java > Build Path > Classpath Variables. Use the "New..." button 
+        to add a new variable, with the following details:
+            <ul>  
+              <li>Name: MAVEN_REPO</li>
+              <li>Path: C:\Documents and Settings\Administrator\.maven\repository</li>
+            </ul>
+        </li> 
+      </ol>
+      </subsection>
+      
+      <subsection name="Finishing the project">
+      <ol start="19">  
+        <li>Change to the directory for the project, e.g., use the following commands:
+            <source>cd C:\workspace\OpenMentor Trunk
+maven site:generate</source>
+			This will fail, for now, but that's OK.
+        </li> 
+      </ol>
+      </subsection>
+
+      <subsection name="Tomcat">
+      <ol start="20">  
+        <li>Install Apache Tomcat, use version 5.5 or more recent
+            <ul>  
+              <li>URL: <a href="http://jakarta.apache.org/site/downloads/downloads_tomcat-5.cgi">
+                       http://jakarta.apache.org/site/downloads/downloads_tomcat-5.cgi</a></li>
+            </ul>
+        </li> 
+      </ol>
+      </subsection>
+
+      <subsection name="MySQL">
+      <ol start="21">  
+        <li>Install MySQL, we currently use version 4.1, although newer ones might be OK
+            <ul>  
+              <li>URL: <a href="http://download.mirror.ac.uk/sites/www.mysql.org/Downloads/MySQL-4.1/mysql-4.1.12a-win32.zip">
+                       http://download.mirror.ac.uk/sites/www.mysql.org/Downloads/MySQL-4.1/mysql-4.1.12a-win32.zip
+                       </a></li>
+            </ul>
+        </li> 
+      </ol>
+      </subsection>
+
+      <subsection name="Running Maven">
+      <p>At this point, you should be able to go to the main directory, and run Maven from 
+      the command line, and the built should be successful, although it will not yet 
+      pass all tests. </p>
+      <ol start="22">  
+        <li>Type the following commands:
+            <source>cd C:\workspace\OpenMentor Trunk\
+maven site:generate
+maven eclipse</source>
+            If you now open the project in Eclipse, or refresh it if Eclipse is still open, 
+            you should now find that there are no build errors in Eclipse either. 
+        </li> 
+      </ol>
+      </subsection>
+
+      <subsection name="Configuring the components">
+      <ol start="23">  
+        <li>Add the user details into the Tomcat configuration. To do this,
+            edit the file $CATALINA_HOME/conf/tomcat-users.xml, where 
+            "$CATALINA_HOME" is the root of the Tomcat installation directory.
+            Add a new user, as follows:
+            <source>&lt;user username="ant" password="Aonpte6n1" roles="manager"/&gt;</source>
+            You'll need to restart Tomcat for this to have the right
+            effect. 
+        </li> 
+        
+        <li><p>Create a new database and local user for MySQL. Use the
+            following details:</p>
+            <ul>
+              <li>Database: hibernate_openmentor</li>
+              <li>Username: sa</li>
+              <li>Password: none</li>
+            </ul>
+            <p>This is OK for development purposes, although it is
+            clearly hopelessly insecure. </p>
+            <p>The best way of doing this is probably to use an administration
+            tools such as the MySQL Administrator, which can be downloaded
+            from the MySQL web site. </p>
+        </li> 
+        
+        <li>Build and deploy the web application to Tomcat. Do this by
+            using the following command:
+            <source>maven tomcat:deploy</source>
+        </li>
+      </ol>
+     </subsection>
+   </section>
+  </body>
+</document>

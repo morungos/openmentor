@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
+<!DOCTYPE dataset SYSTEM "file://hibernate_openmentor-data.dtd">
+<dataset name="all">
+
+    <TblAssignment Id="1" CourseId="CM2006" AssignmentTitle="Ians one"/>
+    <TblAssignment Id="2" CourseId="CM2006" AssignmentTitle="New one"/>
+    <TblAssignment Id="3" CourseId="CM2006" AssignmentTitle="Assignment3"/>
+    <TblAssignment Id="4" CourseId="CM2006" AssignmentTitle="Which"/>
+    <TblComment Id="1" Text="Would they be close enough geographically?  You haven't established that this would just be on offer only for those in the area of the university. From your description of your learners, a meeting as an effort to counter isolation and encourage interaction with known individuals would probably be welcome.  There is a strong argument against using these sessions to introduce learners to the technology.  Some activities done on the computer they will be using, with synchronous telephone and e-mail support, is a more authentic learning environment." SubmissionId="1"/>
+    <TblComment Id="2" Text="Including assessment which, from your description, will probably be important to your learners." SubmissionId="1"/>
+    <TblComment Id="3" Text="Its good to see you found this resource useful." SubmissionId="1"/>
+    <TblComment Id="4" Text="Well argued." SubmissionId="1"/>
+    <TblComment Id="5" Text="Do you mean ?state' here, that is, funded by public money rather than private?" SubmissionId="1"/>
+    <TblComment Id="6" Text="On this subject or something similar?  It would be good to know what lessons you have learned from these experiences." SubmissionId="1"/>
+    <TblComment Id="7" Text="If the exam structure for students is still the same, will the teachers be encouraged to implement this new learning into their classroom practice?" SubmissionId="1"/>
+    <TblComment Id="8" Text="This is a good summary.  You also need to note down which areas you will need to explore further." SubmissionId="1"/>
+    <TblComment Id="9" Text="Not a word wasted here! Good introduction, concise but with all relevance information included. It would also be good to add here a statement about the source of your knowledge about your learners. I realise that some of this is woven into your discussion." SubmissionId="1"/>
+    <TblComment Id="10" Text="Pre-assessment of what they can actually do will be important." SubmissionId="1"/>
+    <TblComment Id="11" Text="So they could probably tell you what constitutes a good experiment but would not have designed and carried one out themselves?  And while they may not have been encouraged to reflect on their practice, in the right environment or with appropriate rewards they might adapt quite easily to a constructivist learning environment. This would be interesting to test out." SubmissionId="1"/>
+    <TblCommentClasses CommentId="1" CategoryName="C1"/>
+    <TblCommentClasses CommentId="2" CategoryName="B1"/>
+    <TblCommentClasses CommentId="2" CategoryName="B5"/>
+    <TblCommentClasses CommentId="3" CategoryName="A1"/>
+    <TblCommentClasses CommentId="5" CategoryName="C1"/>
+    <TblCommentClasses CommentId="6" CategoryName="C1"/>
+    <TblCommentClasses CommentId="6" CategoryName="B5"/>
+    <TblCommentClasses CommentId="7" CategoryName="C2"/>
+    <TblCommentClasses CommentId="7" CategoryName="C1"/>
+    <TblCommentClasses CommentId="8" CategoryName="B1"/>
+    <TblCommentClasses CommentId="8" CategoryName="A1"/>
+    <TblCommentClasses CommentId="8" CategoryName="B5"/>
+    <TblCommentClasses CommentId="9" CategoryName="D1"/>
+    <TblCommentClasses CommentId="9" CategoryName="B1"/>
+    <TblCommentClasses CommentId="9" CategoryName="B5"/>
+    <TblCommentClasses CommentId="10" CategoryName="B5"/>
+    <TblCommentClasses CommentId="11" CategoryName="B1"/>
+    <TblCommentClasses CommentId="11" CategoryName="C1"/>
+    <TblCommentClasses CommentId="11" CategoryName="B5"/>
+    <TblSubmission Id="1" Filename=", file" Grade="1" AssignmentId="1"/>
+    <TblSubmissionStudents SubmissionId="1" StudentId="M0000003"/>
+    <TblSubmissionTutors SubmissionId="1" TutorId="00900004"/>
+</dataset>
