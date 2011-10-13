@@ -76,7 +76,7 @@
     <property name="authenticationFailureUrl">
       <value>/loginError.htm</value>
     </property>
-    <property name="defaultTargetUrl"><value>/</value></property>
+    <property name="defaultTargetUrl"><value>/index.jsp</value></property>
     <property name="filterProcessesUrl">
       <value>/j_security_check</value>
     </property>
